@@ -1,4 +1,6 @@
 import telebot
+import random
+from config import mezzage
 bot = telebot.TeleBot("5254236633:AAFXg6vQmckgHgysEkKES50Vohme-hWQFJQ")
 
 
@@ -9,7 +11,7 @@ def send_welcome(message):
 
 @bot.message_handler(content_types=['voice'])
 def handle_voice(message):
-    bot.reply_to(message, "сука, я же блина говорил, ГОЛОСОВЫЕ НЕЛЬЗЯ, пидор")
+    bot.reply_to(message, random.choice(mezzage))
     pass
 
 

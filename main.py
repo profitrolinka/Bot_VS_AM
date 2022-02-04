@@ -1,17 +1,27 @@
 import telebot
 import random
-from config import mezzage
+from datetime import datetime
+from config import mezzage_day, mezzage_night
+
 bot = telebot.TeleBot("5254236633:AAFXg6vQmckgHgysEkKES50Vohme-hWQFJQ")
+am_time = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 22)
+pm_time = datetime(datetime.now().year, datetime.now().month, datetime.now().day+1, 8)
 
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "короч, НЕЛЬЗЯ гс отправлять")
+    if am_time < datetime.now() < pm_time:
+        bot.reply_to(message, "короч, НЕЛЬЗЯ гс отправлять")
+    else:
+        bot.reply_to(message, "Тссссссс, ты хренли команды пишешь ночью??????\nладно.....\nГОЛОСОВЫЕ НЕЛЬЗЯ!!!!!")
 
 
 @bot.message_handler(content_types=['voice'])
 def handle_voice(message):
-    bot.reply_to(message, random.choice(mezzage))
+    if am_time < datetime.now() < pm_time:
+        bot.reply_to(message, random.choice(mezzage_day))
+    else:
+        bot.reply_to(message, random.choice(mezzage_night))
     pass
 
 
